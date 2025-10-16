@@ -1,0 +1,48 @@
+public class lab_6 {
+    
+    public static void main(String[] args) {
+        int n = 4;
+        int[] keys = {10, 20, 30, 40};
+        double[] p = {0.1, 0.2, 0.4, 0.3};
+        double[] q = {0.05, 0.1, 0.05, 0.05, 0.1};
+        
+        double[][] cost = new double[n + 2][n + 2];
+        double[][] w = new double[n + 2][n + 2];
+        int[][] root = new int[n + 1][n + 1];
+        
+        // Initialize base cases
+        for(int i = 1; i <= n + 1; i++) {
+            cost[i][i-1] = q[i-1];
+            w[i][i-1] = q[i-1];
+        }
+        
+        // Fill tables for increasing tree sizes
+        for(int len = 1; len <= n; len++) {
+            for(int i = 1; i <= n - len + 1; i++) {
+                int j = i + len - 1;
+                cost[i][j] = Double.MAX_VALUE;
+                w[i][j] = w[i][j-1] + p[j-1] + q[j];
+                
+                // Try all roots
+                for(int r = i; r <= j; r++) {
+                    double temp = cost[i][r-1] + cost[r+1][j] + w[i][j];
+                    if(temp < cost[i][j]) {
+                        cost[i][j] = temp;
+                        root[i][j] = r;
+                    }
+                }
+            }
+        }
+        
+        System.out.printf("Minimum Expected Cost: %.4f%n", cost[1][n]);
+        
+        System.out.println("\nRoot Matrix:");
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= n; j++) {
+                if(j >= i) System.out.printf("%2d ", root[i][j]);
+                else System.out.print(" - ");
+            }
+            System.out.println();
+        }
+    }
+}
