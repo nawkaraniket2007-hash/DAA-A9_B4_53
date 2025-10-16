@@ -1,4 +1,4 @@
-public class lab_6 {
+public class lab_6_task1{
     
     public static void main(String[] args) {
         int n = 4;
@@ -8,7 +8,7 @@ public class lab_6 {
         
         double[][] cost = new double[n + 2][n + 2];
         double[][] w = new double[n + 2][n + 2];
-        int[][] root = new int[n + 1][n + 1];
+        int[][] root = new int[n + 2][n + 2];
         
         // Initialize base cases
         for(int i = 1; i <= n + 1; i++) {
@@ -34,7 +34,10 @@ public class lab_6 {
             }
         }
         
-        System.out.printf("Minimum Expected Cost: %.4f%n", cost[1][n]);
+        System.out.println("Keys: [10, 20, 30, 40]");
+        System.out.println("P[i]: [0.1, 0.2, 0.4, 0.3]");
+        System.out.println("Q[i]: [0.05, 0.1, 0.05, 0.05, 0.1]");
+        System.out.printf("\nMinimum Expected Cost: %.4f\n", cost[1][n]);
         
         System.out.println("\nRoot Matrix:");
         for(int i = 1; i <= n; i++) {
